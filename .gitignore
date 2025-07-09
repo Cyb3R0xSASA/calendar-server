@@ -1,0 +1,56 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime files
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+test/
+
+# Coverage directories
+coverage/
+
+# Output folders
+dist/
+build/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# VSCode settings (optional)
+.vscode/
+
+# IDEs and editors
+.idea/
+*.swp
+*.swo
+
+# Test reports
+test-output/
+
+# PM2 logs and dumps
+pmmodules/
+*.pm2.log
+*.dump
+
+# Database local files (optional, if using local DB storage)
+*.sqlite
+*.db
+
+# Swagger generated files (optional)
+# swagger.json
+# swagger.yaml
