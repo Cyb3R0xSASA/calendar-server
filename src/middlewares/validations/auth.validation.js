@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { validateBody } from "../../utils/validate.util.js";
 
-const name = Joi.string().min(2).max(20).required().pattern(/^[A-Za-z]{2,10}$/)
+export const name = Joi.string().min(2).max(20).required().pattern(/^[A-Za-z]{2,10}$/)
 const email = { email: Joi.string().email().lowercase().trim().required() };
 export const password = { password: Joi.string().min(8).max(100).required().pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{}|;:',.<>?/])[A-Za-z\d!@#$%^&*()_+\-=\[\]{}|;:',.<>?/]{8,100}$/) }
 const otp = { otp: Joi.string().required().pattern(/^\d{6}$/) }

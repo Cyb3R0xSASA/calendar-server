@@ -3,12 +3,16 @@ import { userValidation } from "../middlewares/validations/user.validation.js";
 import { userController } from "../controllers/user.controller.js";
 import { protectRoute, role } from "../middlewares/auth.middleware.js";
 import { checkId } from "../utils/checkId.util.js";
-import { upload } from "../config/cloudinary.conf.js";
+import { uploadImage } from "../config/cloudinary.conf.js";
 
 const router = Router();
-router.get('/me', protectRoute, userController.me);
-router.patch('/change-password', protectRoute, userValidation.changePassword, userController.changePassword);
-router.patch('/profile-picture', protectRoute, upload.single('profilePic'), userController.profilePicture);
+
+router.route('/profile')
+    .get(protectRoute, userController.me)
+    .put(protectRoute, userValidation.updateProfile, userController.updateProfile);
+
+router.patch('/profile/password', protectRoute, userValidation.changePassword, userController.changePassword);
+router.patch('/profile/picture', protectRoute, uploadImage('profile_pics'), userController.profilePicture);
 
 router.get('/', protectRoute, role('admin'), userController.users);
 router.delete('/:id', protectRoute, role('admin'), checkId, userController.deleteUser);

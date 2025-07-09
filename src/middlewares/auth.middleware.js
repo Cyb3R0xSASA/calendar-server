@@ -1,6 +1,4 @@
-import { Types } from "mongoose";
 import { HTTP_STATUS } from "../config/constants.conf.js";
-import User from "../models/user.model.js";
 import { asyncError, sendError } from "../utils/errorHandler.util.js";
 import { verifyAccessToken } from "../utils/jwt.util.js";
 

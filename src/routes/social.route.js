@@ -1,9 +1,7 @@
 import { Router } from "express";
-import passport from "passport";
-import passportConfig from '../config/passport.conf.js';
 import { createTokens } from "../utils/jwt.util.js";
-import { SERVER } from "../config/constants.conf.js";
 import { sendSuccess } from "../utils/errorHandler.util.js";
+import passport from "../config/passport.conf.js";
 
 const router = Router();
 router.get('/google',

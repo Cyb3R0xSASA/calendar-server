@@ -21,6 +21,19 @@ const me = asyncError(
     }
 );
 
+const updateProfile = asyncError(
+    async (req, res, next) => {
+        const { first_name, last_name } = req.body;
+        await User.updateOne({ _id: req.user.userId }, { firstName: first_name, lastName: last_name });
+        sendSuccess(
+            res,
+            'Name update successfully',
+            undefined,
+            HTTP_STATUS.OK
+        );
+    }
+);
+
 const changePassword = asyncError(
     async (req, res, next) => {
         const { password, old_password } = req.body;
@@ -123,6 +136,7 @@ const deleteUser = asyncError(
 export const userController = {
     users,
     me,
+    updateProfile,
     changePassword,
     profilePicture,
     changeRole,

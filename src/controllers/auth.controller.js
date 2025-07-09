@@ -1,11 +1,9 @@
-import { compareSync } from "bcrypt";
 import { HTTP_STATUS, JWT } from "../config/constants.conf.js";
-import logger from "../config/logger.conf.js";
 import User from "../models/user.model.js";
-import { destroyEmailOTP, limitOtp, limitOtpTrying, otpGenerator, sendingOTP } from "../utils/email/otp.js";
+import { destroyEmailOTP, limitOtpTrying, otpGenerator, sendingOTP } from "../utils/email/otp.js";
 import { asyncError, sendError, sendSuccess } from "../utils/errorHandler.util.js";
 import { redis } from "../config/redis.conf.js";
-import { createTokens, generateAccessToken, generateRefreshToken, setTokensCookie, storeRefreshToken, verifyAndRotateRefreshToken, verifyRefreshToken } from "../utils/jwt.util.js";
+import { createTokens, generateAccessToken, setTokensCookie, verifyAndRotateRefreshToken, verifyRefreshToken } from "../utils/jwt.util.js";
 
 const register = asyncError(
     async (req, res, next) => {

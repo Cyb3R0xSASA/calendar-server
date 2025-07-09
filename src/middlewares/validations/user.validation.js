@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { password } from "./auth.validation.js";
+import { name, password } from "./auth.validation.js";
 import { validateBody } from "../../utils/validate.util.js";
 
 const changePassword = Joi.object({
@@ -11,7 +11,13 @@ const changeRole = Joi.object({
     role: Joi.string().valid('user', 'admin'),
 });
 
+const updateProfile = Joi.object({
+    first_name: name,
+    last_name: name,
+});
+
 export const userValidation = {
     changePassword: validateBody(changePassword),
     changeRole: validateBody(changeRole),
+    updateProfile: validateBody(updateProfile),
 };
