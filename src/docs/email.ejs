@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= subject %></title>
+    </head>
+    <body
+        style="
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        "
+    >
+        <table
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            style="padding: 20px 0"
+        >
+            <tr>
+                <td align="center">
+                    <table
+                        width="600"
+                        cellpadding="0"
+                        cellspacing="0"
+                        style="
+                            background-color: #ffffff;
+                            padding: 40px;
+                            border-radius: 8px;
+                        "
+                    >
+                        <tr>
+                            <td align="center" style="padding-bottom: 20px">
+                                <h2 style="color: #333"><%= header %></h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="font-size: 16px; color: #555">
+                                    Hello
+                                    <strong
+                                        ><%= firstName %> <%= lastName
+                                        %></strong
+                                    >,
+                                </p>
+                                <p style="font-size: 16px; color: #555">
+                                    <%= paragraph %>
+                                </p>
+                                <p
+                                    style="
+                                        font-size: 32px;
+                                        font-weight: bold;
+                                        color: #007bff;
+                                        text-align: center;
+                                        margin: 30px 0;
+                                    "
+                                >
+                                    <%= otp %>
+                                </p>
+                                <p style="font-size: 14px; color: #999">
+                                    This code will expire in 10 minutes. If you
+                                    didn't request this, please ignore this
+                                    email.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                align="center"
+                                style="
+                                    padding-top: 40px;
+                                    font-size: 12px;
+                                    color: #aaa;
+                                "
+                            >
+                                &copy; 2025 Mohmed Mostafa. All rights reserved.
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
