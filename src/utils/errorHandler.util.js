@@ -17,7 +17,7 @@ export const sendError = (
     res,
     message,
     errorCode = 'UNKNOWN_ERROR',
-    statusCode = HTTP_STATUS.INTERNAL_SERVER_ERROR,
+    statusCode = HTTP_STATUS.BAD_REQUEST,
     errors = [],
 ) => {
     return res.status(statusCode).json({

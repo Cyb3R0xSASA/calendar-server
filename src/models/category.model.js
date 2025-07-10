@@ -2,13 +2,14 @@ import pkg from 'mongoose';
 const { models, model, Schema } = pkg;
 
 export const constants = {
-    title: {
+    title: (extra = {}) => ({
         type: String,
         minlength: 2,
         maxlength: 50,
         required: true,
         trim: true,
-    },
+        ...extra,
+    }),
     date: {
         type: Date,
         required: true,
@@ -21,10 +22,7 @@ export const constants = {
 
 const categorySchema = new Schema(
     {
-        name: {
-            ...constants.title,
-            unique: true,
-        },
+        title: constants.title({ unique: true }),
     },
     { timestamps: true }
 );

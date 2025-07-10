@@ -8,7 +8,7 @@ const eventSchema = new Schema({
         ref: 'User',
         required: true,
     },
-    ...constants.title,
+    title: constants.title(),
     description: {
         type: String,
         minlength: 10,
@@ -33,12 +33,12 @@ const eventSchema = new Schema({
         type: String,
         enum: ['activity_leader', 'student_advisor', 'health_advisor', 'teacher', 'school_principal', 'parent', 'student'],
     }],
-    ...constants.banner,
+    banner: constants.banner,
     products: [{
-        ...constants.banner,
-        title: { ...constants.title },
+        banner: constants.banner,
+        title: constants.title() ,
         enabled: { type: Boolean, default: true },
     }],
 });
 
-const Event = models.Event || model('Event', eventSchema)
+export const Event = models.Event || model('Event', eventSchema)

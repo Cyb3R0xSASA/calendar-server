@@ -4,7 +4,7 @@ const { models, model, Schema } = pkg;
 
 const termSchema = new Schema(
     {
-        name: { ...constants.title },
+        name: constants.title() ,
         startDate: { ...constants.date },
         endDate: { ...constants.date },
     },
