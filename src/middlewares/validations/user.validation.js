@@ -8,7 +8,7 @@ const changePassword = Joi.object({
 });
 
 const changeRole = Joi.object({
-    role: Joi.string().valid('user', 'admin'),
+    role: Joi.string().valid('user', 'admin', 'publisher'),
 });
 
 const updateProfile = Joi.object({

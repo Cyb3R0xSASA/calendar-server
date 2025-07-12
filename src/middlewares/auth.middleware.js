@@ -33,7 +33,6 @@ export const role = (...roles) => {
                 HTTP_STATUS.UNAUTHORIZED,
                 'User not allowed to use this endpoint need to login before use it.'
             );
-
         next();
     }
 };

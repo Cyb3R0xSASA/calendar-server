@@ -3,7 +3,8 @@ import { userValidation } from "../middlewares/validations/user.validation.js";
 import { userController } from "../controllers/user.controller.js";
 import { protectRoute, role } from "../middlewares/auth.middleware.js";
 import { checkId } from "../utils/checkId.util.js";
-import { uploadImage } from "../config/cloudinary.conf.js";
+import { uploadImage } from "../middlewares/upload.middleware.js";
+import checkDuplicate from "../middlewares/check-duplicate.middleware.js";
 
 const router = Router();
 

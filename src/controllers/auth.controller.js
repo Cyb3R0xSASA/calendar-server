@@ -1,4 +1,4 @@
-import { HTTP_STATUS, JWT } from "../config/constants.conf.js";
+import { HTTP_STATUS } from "../config/constants.conf.js";
 import User from "../models/user.model.js";
 import { destroyEmailOTP, limitOtpTrying, otpGenerator, sendingOTP } from "../utils/email/otp.js";
 import { asyncError, sendError, sendSuccess } from "../utils/errorHandler.util.js";
@@ -21,6 +21,7 @@ const register = asyncError(
         const newUser = new User({ firstName, lastName, email, password });
         await otpGenerator(newUser, 'verify');
         await newUser.save();
+        console.log('first');
         sendSuccess(
             res,
             'User created successfully',
@@ -43,7 +44,7 @@ const verifyEmail = asyncError(
                 res,
                 'Resource Not Exist',
                 'NOT_EXIST',
-                HTTP_STATUS.CONFLICT,
+                HTTP_STATUS.BAD_REQUEST,
                 'You must register first to verify your email.',
             );
         if (user.isEmailVerified)
@@ -74,7 +75,7 @@ const resendVerifyOtp = asyncError(
         if (!user)
             return sendError(
                 res,
-                'User Not Register yet. Register at first',
+                'Resource Not Exist',
                 'NOT_EXIST',
                 HTTP_STATUS.BAD_REQUEST,
                 'You must register first to verify your email.',
@@ -99,9 +100,9 @@ const login = asyncError(
         if (!user || !user?.isEmailVerified)
             return sendError(
                 res,
-                'User Not Register yet. Register at first',
-                'NOT_EXIST',
-                HTTP_STATUS.CONFLICT,
+                'Email or Password not correct, try again later.',
+                'LOGIN_FAILED',
+                HTTP_STATUS.BAD_REQUEST,
                 'You must register first, then verify, then login not login before them.',
             );
         const passwordMatch = user.comparePassword(password);
@@ -138,7 +139,7 @@ const forgotPassword = asyncError(
         if (!user || !user.isEmailVerified)
             return sendError(
                 res,
-                'User Not Register yet. Register at first',
+                'Resource Not Exist',
                 'NOT_EXIST',
                 HTTP_STATUS.BAD_REQUEST,
                 'You must register first to reset your password.',
@@ -154,7 +155,7 @@ const resetPassword = asyncError(
         if (!user || !user.isEmailVerified)
             return sendError(
                 res,
-                'User Not Register yet. Register at first',
+                'Resource Not Exist',
                 'NOT_EXIST',
                 HTTP_STATUS.BAD_REQUEST,
                 'You must register first to verify your email.',
@@ -179,8 +180,8 @@ const logout = asyncError(
         if (!refreshToken)
             return sendError(
                 res,
-                '',
-                '',
+                'Resource Not Exist',
+                'NOT_EXIST',
                 HTTP_STATUS.CONFLICT,
                 'Now access token provided',
             );
@@ -194,6 +195,20 @@ const logout = asyncError(
             undefined,
             HTTP_STATUS.OK
         );
+    }
+);
+
+const deleteMe = asyncError(
+    async (req, res, next) => {
+        await User.findByIdAndDelete(req.user.userId);
+        res.clearCookie('refresh_token');
+        res.clearCookie('access_token');
+        sendSuccess(
+            res,
+            'Deleted successfully',
+            undefined,
+            HTTP_STATUS.OK
+        )
     }
 );
 
@@ -235,4 +250,5 @@ export const authController = {
     resetPassword,
     logout,
     refreshToken,
+    deleteMe,
 }

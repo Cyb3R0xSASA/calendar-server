@@ -10,7 +10,8 @@ router.post('/send-verify-email', authValidation.sendOtp, authController.resendV
 router.post('/login', authValidation.login, authController.login);
 router.post('/password/reset', authValidation.sendOtp, authController.forgotPassword);
 router.post('/password/confirm', authValidation.resetPassword, authController.resetPassword);
-router.post('/logout', protectRoute, authController.logout);
+router.post('/logout', authController.logout);
 router.post('/refresh-token', authController.refreshToken);
+router.delete('/', protectRoute, authController.deleteMe)
 
 export default router;

@@ -88,7 +88,7 @@ const profilePicture = asyncError(
 
 const users = asyncError(
     async (req, res, next) => {
-        const users = await User.find().select('-password -_id -isEmailVerified -__v');
+        const users = await User.find().select('-password -isEmailVerified -__v');
         return sendSuccess(
             res,
             'Successfully fetch users',
@@ -101,6 +101,15 @@ const users = asyncError(
 const changeRole = asyncError(
     async (req, res, next) => {
         const { role } = req.body;
+        const user = await User.findById(req.params.id);
+        if (!user)
+            sendError(
+                res,
+                'User not exist',
+                'NOT_EXIST',
+                HTTP_STATUS.CONFLICT,
+                'User not exist in database check id, and try again later',
+            );
         await User.updateOne({ _id: req.params.id }, { role })
         return sendSuccess(
             res,

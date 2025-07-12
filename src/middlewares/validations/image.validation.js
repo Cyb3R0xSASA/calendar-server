@@ -2,6 +2,7 @@ import { HTTP_STATUS } from "../../config/constants.conf.js";
 import { sendError } from "../../utils/errorHandler.util.js";
 
 export const validateSingleImage = (req, res, next) => {
+    console.log('first')
     if (!req.file || !req.file.path) {
         return sendError(
             res,
@@ -15,6 +16,7 @@ export const validateSingleImage = (req, res, next) => {
 };
 
 export const validateMultipleImages = (req, res, next) => {
+    console.log('first')
     if (!req.files || !Array.isArray(req.files) || req.files.length === 0) {
         return sendError(
             res,

@@ -36,7 +36,7 @@ const userSchema = new Schema(
         },
         role: {
             type: String,
-            enum: ['admin', 'teacher', 'student', 'parent'],
+            enum: ['user', 'admin', 'publisher'],
             default: 'user',
         },
         isEmailVerified: {
@@ -44,6 +44,8 @@ const userSchema = new Schema(
             default: false,
         },
         oauthProviders: {
+            type: Object,
+            required: false,
             provider: { type: String, enum: ['google', 'x'], required: true },
             providerId: { type: String, required: true },
             email: { type: String },

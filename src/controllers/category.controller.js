@@ -17,7 +17,7 @@ const addCategory = asyncError(
             );
 
         const newCategory = await Category.create({ title });
-        sendSuccess(
+        return sendSuccess(
             res,
             'Category created successfully.',
             {
@@ -46,14 +46,13 @@ const categories = asyncError(
 
 const category = asyncError(
     async (req, res, next) => {
-        const category = await Category.findOne({ _id: req.params.id });
+        const category = await Category.findById(req.params.id);
         if (noItem(res, 'category', category)) return;
         return sendSuccess(
             res,
             'Successfully fetched category',
             {
                 category: {
-                    id: category._id,
                     title: category.title,
                 }
             },
@@ -72,12 +71,11 @@ const updateCategory = asyncError(
             'Category updated successfully.',
             {
                 category: {
-                    id: newCategory._id,
                     title: newCategory.title,
                 }
             },
             HTTP_STATUS.OK,
-        )
+        );
     }
 );
 
@@ -91,7 +89,7 @@ const deleteCategory = asyncError(
             'Category deleted successfully.',
             undefined,
             HTTP_STATUS.NO_CONTENT,
-        )
+        );
     }
 );
 

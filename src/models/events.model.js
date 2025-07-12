@@ -2,43 +2,31 @@ import pkg from 'mongoose';
 import { constants } from './category.model.js';
 const { models, model, Schema, Types } = pkg;
 
+export const groups = ['all', 'activity_leader', 'student_advisor', 'health_advisor', 'teacher', 'school_principal', 'parent', 'student']
+
 const eventSchema = new Schema({
     user: {
         type: Types.ObjectId,
         ref: 'User',
         required: true,
     },
-    title: constants.title(),
+    title: constants.title({ unique: true }),
     description: {
         type: String,
         minlength: 10,
         maxlength: 1500,
     },
     date: { ...constants.date },
-    repeatRule: {
-        type: String,
-        enum: ['none', 'daily', 'weekly', 'monthly'],
-        default: 'none',
-    },
-    dayOfWeek: {
-        type: String,
-        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        default: null,
-    },
     categories: [{
         type: Types.ObjectId,
         ref: 'Category',
     }],
     targetGroups: [{
         type: String,
-        enum: ['activity_leader', 'student_advisor', 'health_advisor', 'teacher', 'school_principal', 'parent', 'student'],
+        enum: groups,
+        default: groups[0],
     }],
     banner: constants.banner,
-    products: [{
-        banner: constants.banner,
-        title: constants.title() ,
-        enabled: { type: Boolean, default: true },
-    }],
 });
 
 export const Event = models.Event || model('Event', eventSchema)

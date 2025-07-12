@@ -1,7 +1,7 @@
 import { HTTP_STATUS } from "../config/constants.conf.js";
 import { sendError } from "./errorHandler.util.js";
 
-export const noItem = (res, title, item, len = 1,) => {
+export const noItem = (res, title, item, len = 1) => {
     if (!item || !len) {
         sendError(
             res,
